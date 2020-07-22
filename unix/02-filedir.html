@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)http://swcarpentry.github.io/shell-novice/02-filedir/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2020-07-01 07:44:42 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="http://pzindel.github.io/LanternPython">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/lesson.css">
+    <link rel="stylesheet" type="text/css" href="../css/syntax.css">
+
+    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+  <title>
+  Navigating Files and Directories – The Unix Shell
+  </title>  
+
+  </head>
+  <body>
+
+    
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+<!-- Manual ordering of Episodes begins here -->
+
+
+
+
+
+
+
+
+  
+  
+
+
+<!-- Manual ordering of Extras begins here -->
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      
+      
+
+      
+      <a class="navbar-brand" href="../index.html">Home</a>
+
+    </div>
+    <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1" aria-expanded="true" style="">
+      <ul class="nav navbar-nav">
+
+        
+        <li class="dropdown">
+          <a href="./01-intro.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">The Unix Shell <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="./01-intro.html">Introducing the Shell</a></li>
+            
+            
+            <li><a href="./02-filedir.html">Navigating Files and Directories</a></li>
+            
+            
+            <li><a href="./03-create.html">Working With Files and Directories</a></li>
+            
+            
+            <li><a href="./04-pipefilter.html">Pipes and Filters</a></li>
+            
+            
+            <li><a href="./05-loop.html">Loops</a></li>
+            
+            
+            <li><a href="./06-script.html">Shell Scripts</a></li>
+            
+            
+            <li><a href="./07-find.html">Finding Things</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="./aio.html">All in one page</a></li>
+          </ul>
+        </li>
+	        
+		
+		<li class="dropdown">
+          <a href="../python/01-intro.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Programming with Python <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="../python/01-intro.html">Python Fundamentals</a></li>
+            
+            
+            <li><a href="../python/02-numpy.html">Analyzing Patient Data</a></li>
+            
+            
+            <li><a href="../python/03-matplotlib.html">Visualizing Tabular Data</a></li>
+            
+            
+            <li><a href="../python/04-loop.html">Repeating Actions with Loops</a></li>
+            
+            
+            <li><a href="../python/05-lists.html">Storing Multiple Values in Lists</a></li>
+            
+            
+            <li><a href="../python/06-files.html">Analyzing Data from Multiple Files</a></li>
+            
+            
+            <li><a href="../python/07-cond.html">Making Choices</a></li>
+            
+            
+            <li><a href="../python/08-func.html">Creating Functions</a></li>
+            
+            
+            <li><a href="../python/09-errors.html">Errors and Exceptions</a></li>
+            
+            
+            <li><a href="../python/10-defensive.html">Defensive Programming</a></li>
+            
+            
+            <li><a href="../python/11-debugging.html">Debugging</a></li>
+            
+            
+            <li><a href="../python/12-cmdline.html">Command-Line Programs</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../python/aio.html">All in one page</a></li>
+          </ul>
+        </li>
+	
+
+		<li class="dropdown">
+          <a href="../data_analysis/01-intro-to-python.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Analysis <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="../data_analysis/00-before-we-start.html">Before we start</a></li>
+            
+            
+            <li><a href="../data_analysis/01-intro-to-python.html">Short Introduction to Programming in Python</a></li>
+            
+            
+            <li><a href="../data_analysis/02-starting-with-data.html">Starting With Data</a></li>
+            
+            
+            <li><a href="../data_analysis/03-index-slice-subset.html">Indexing, Slicing and Subsetting DataFrames in Python</a></li>
+            
+            
+            <li><a href="../data_analysis/04-data-types.html">Data Types and Formats</a></li>
+            
+            
+            <li><a href="../data_analysis/05-merging-data.html">Combining DataFrames with Pandas</a></li>
+            
+            
+            <li><a href="../data_analysis/06-loops-and-functions.html">Data Workflows and Automation</a></li>
+            
+            
+            <li><a href="../data_analysis/07-visualization.html">Making Plots With plotnine</a></li>
+            
+            
+            <li><a href="../data_analysis/08-all-together.html">Data Ingest and Visualization - Matplotlib and Pandas</a></li>
+            
+            
+            <li><a href="../data_analysis/09-working-with-sql.html">Accessing SQLite Databases Using Python and Pandas</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../data_analysis/aio.html">All in one page</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../licenses.html">License</a></li>
+	
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Manual ordering of Episodes begins here -->
+
+
+
+
+
+
+
+
+  
+  
+
+
+<!-- Manual ordering of Extras begins here -->
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="./01-intro.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../index.html#unix">The Unix Shell</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="./03-create.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Navigating Files and Directories</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br>
+      <strong>Exercises:</strong> 10 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How can I move around on my computer?</p>
+</li>
+	
+	<li><p>How can I see what files and directories I have?</p>
+</li>
+	
+	<li><p>How can I specify the location of a file or directory on my computer?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Explain the similarities and differences between a file and a directory.</p>
+</li>
+	
+	<li><p>Translate an absolute path into a relative path and vice versa.</p>
+</li>
+	
+	<li><p>Construct absolute and relative paths that identify specific files and directories.</p>
+</li>
+	
+	<li><p>Use options and arguments to change the behaviour of a shell command</p>
+</li>
+	
+	<li><p>Demonstrate the use of tab completion, and explain its advantages.</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>The part of the operating system responsible for managing files and directories
+is called the <strong>file system</strong>.
+It organizes our data into files,
+which hold information,
+and directories (also called ‘folders’),
+which hold files or other directories.</p>
+
+<p>Several commands are frequently used to create, inspect, rename, and delete files and directories.
+To start exploring them, we’ll go to our open shell window.</p>
+
+<p>First let’s find out where we are by running a command called <code class="language-plaintext highlighter-rouge">pwd</code>
+(which stands for ‘print working directory’). Directories are like <em>places</em> - at any time
+while we are using the shell we are in exactly one place, called
+our <strong>current working directory</strong>. Commands mostly read and write files in the
+current working directory, i.e. ‘here’, so knowing where you are before running
+a command is important. <code class="language-plaintext highlighter-rouge">pwd</code> shows you where you are:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/nelle
+</code></pre></div></div>
+
+<p>Here,
+the computer’s response is <code class="language-plaintext highlighter-rouge">/Users/nelle</code>,
+which is Nelle’s <strong>home directory</strong>:</p>
+
+<blockquote class="callout">
+  <h2 id="home-directory-variation">Home Directory Variation</h2>
+
+  <p>The home directory path will look different on different operating systems.
+On Linux it may look like <code class="language-plaintext highlighter-rouge">/home/nelle</code>,
+and on Windows it will be similar to <code class="language-plaintext highlighter-rouge">C:\Documents and Settings\nelle</code> or
+<code class="language-plaintext highlighter-rouge">C:\Users\nelle</code>.
+(Note that it may look slightly different for different versions of Windows.)
+In future examples, we’ve used Mac output as the default - Linux and Windows
+output may differ slightly, but should be generally similar.</p>
+</blockquote>
+
+<p>To understand what a ‘home directory’ is,
+let’s have a look at how the file system as a whole is organized.  For the
+sake of this example, we’ll be
+illustrating the filesystem on our scientist Nelle’s computer.  After this
+illustration, you’ll be learning commands to explore your own filesystem,
+which will be constructed in a similar way, but not be exactly identical.</p>
+
+<p>On Nelle’s computer, the filesystem looks like this:</p>
+
+<p><img src="./02-filedir_files/filesystem.svg" alt="The file system is made up of a root directory that contains sub-directories
+titled bin, data, users, and tmp"></p>
+
+<p>At the top is the <strong>root directory</strong>
+that holds everything else.
+We refer to it using a slash character, <code class="language-plaintext highlighter-rouge">/</code>, on its own;
+this is the leading slash in <code class="language-plaintext highlighter-rouge">/Users/nelle</code>.</p>
+
+<p>Inside that directory are several other directories:
+<code class="language-plaintext highlighter-rouge">bin</code> (which is where some built-in programs are stored),
+<code class="language-plaintext highlighter-rouge">data</code> (for miscellaneous data files),
+<code class="language-plaintext highlighter-rouge">Users</code> (where users’ personal directories are located),
+<code class="language-plaintext highlighter-rouge">tmp</code> (for temporary files that don’t need to be stored long-term),
+and so on.</p>
+
+<p>We know that our current working directory <code class="language-plaintext highlighter-rouge">/Users/nelle</code> is stored inside <code class="language-plaintext highlighter-rouge">/Users</code>
+because <code class="language-plaintext highlighter-rouge">/Users</code> is the first part of its name.
+Similarly,
+we know that <code class="language-plaintext highlighter-rouge">/Users</code> is stored inside the root directory <code class="language-plaintext highlighter-rouge">/</code>
+because its name begins with <code class="language-plaintext highlighter-rouge">/</code>.</p>
+
+<blockquote class="callout">
+  <h2 id="slashes">Slashes</h2>
+
+  <p>Notice that there are two meanings for the <code class="language-plaintext highlighter-rouge">/</code> character.
+When it appears at the front of a file or directory name,
+it refers to the root directory. When it appears <em>inside</em> a path,
+it’s just a separator.</p>
+</blockquote>
+
+<p>Underneath <code class="language-plaintext highlighter-rouge">/Users</code>,
+we find one directory for each user with an account on Nelle’s machine,
+her colleagues <em>imhotep</em> and <em>larry</em>.</p>
+
+<p><img src="./02-filedir_files/home-directories.svg" alt="Home Directories"></p>
+
+<p>The user <em>imhotep</em>’s files are stored in <code class="language-plaintext highlighter-rouge">/Users/imhotep</code>,
+user <em>larry</em>’s in <code class="language-plaintext highlighter-rouge">/Users/larry</code>,
+and Nelle’s in <code class="language-plaintext highlighter-rouge">/Users/nelle</code>.  Because Nelle is the user in our
+examples here, this is why we get <code class="language-plaintext highlighter-rouge">/Users/nelle</code> as our home directory.
+Typically, when you open a new command prompt you will be in
+your home directory to start.</p>
+
+<p>Now let’s learn the command that will let us see the contents of our
+own filesystem.  We can see what’s in our home directory by running <code class="language-plaintext highlighter-rouge">ls</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Applications Documents    Library      Music        Public
+Desktop      Downloads    Movies       Pictures
+</code></pre></div></div>
+
+<p>(Again, your results may be slightly different depending on your operating
+system and how you have customized your filesystem.)</p>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code> prints the names of the files and directories in the current directory.
+We can make its output more comprehensible by using the <code class="language-plaintext highlighter-rouge">-F</code> <strong>option</strong>
+(also known as a <strong>switch</strong> or a <strong>flag</strong>) ,
+which tells <code class="language-plaintext highlighter-rouge">ls</code> to classify the output
+by adding a marker to file and directory names to indicate what they are:</p>
+<ul>
+  <li>a trailing <code class="language-plaintext highlighter-rouge">/</code> indicates that this is a directory</li>
+  <li><code class="language-plaintext highlighter-rouge">@</code> indicates a link</li>
+  <li><code class="language-plaintext highlighter-rouge">*</code> indicates an executable</li>
+</ul>
+
+<p>Depending on your default options,
+the shell might also use colors to indicate whether each entry is a file or
+directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-F</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Applications/ Documents/    Library/      Music/        Public/
+Desktop/      Downloads/    Movies/       Pictures/
+</code></pre></div></div>
+
+<blockquote class="callout">
+  <h2 id="clearing-your-terminal">Clearing your terminal</h2>
+
+  <p>If your screen gets too cluttered, you can clear your terminal using the
+<code class="language-plaintext highlighter-rouge">clear</code> command. You can still access previous commands using <kbd>↑</kbd>
+and <kbd>↓</kbd> to move line-by-line, or by scrolling in your terminal.</p>
+</blockquote>
+
+<p>Here,
+we can see that our home directory contains only <strong>sub-directories</strong>.
+Any names in your output that don’t have a classification symbol,
+are plain old <strong>files</strong>.</p>
+
+<h2 id="general-syntax-of-a-shell-command">General syntax of a shell command</h2>
+<p>Consider the command below as a general example of a command,
+which we will dissect into its component parts:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-F</span> /
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code> is the <strong>command</strong>, with an <strong>option</strong> <code class="language-plaintext highlighter-rouge">-F</code> and an
+<strong>argument</strong> <code class="language-plaintext highlighter-rouge">/</code>.
+We’ve already encountered options (also called <strong>switches</strong> or <strong>flags</strong>) which
+either start with a single dash (<code class="language-plaintext highlighter-rouge">-</code>) or two dashes (<code class="language-plaintext highlighter-rouge">--</code>), and they change the behaviour of a command.
+Arguments tell the command what to operate on (e.g. files and directories).
+Sometimes options and arguments are referred to as <strong>parameters</strong>.
+A command can be called with more than one option and more than one argument: but a
+command doesn’t always require an argument or an option.</p>
+
+<p>Each part is separated by spaces: if you omit the space
+between <code class="language-plaintext highlighter-rouge">ls</code> and <code class="language-plaintext highlighter-rouge">-F</code> the shell will look for a command called <code class="language-plaintext highlighter-rouge">ls-F</code>, which
+doesn’t exist. Also, capitalization can be important. For example, <code class="language-plaintext highlighter-rouge">ls -s</code> will display the size of files and directories alongside the names, while <code class="language-plaintext highlighter-rouge">ls -S</code> will sort the files and directories by size, as shown below:</p>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -s Desktop/data-shell/data
+total 116
+ 4 amino-acids.txt   4 animals.txt   4 morse.txt  12 planets.txt  76 sunspot.txt
+ 4 animal-counts     4 elements      4 pdb         4 salmon.txt
+$ ls -S Desktop/data-shell/data
+sunspot.txt  animal-counts  pdb        amino-acids.txt  salmon.txt
+planets.txt  elements       morse.txt  animals.txt
+</code></pre></div></div>
+
+<p>Putting all that together, our command above gives us a listing
+of files and directories in the root directory <code class="language-plaintext highlighter-rouge">/</code>.
+An example of the output you might get from the above command is given below:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-F</span> /
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Applications/         System/
+Library/              Users/
+Network/              Volumes/
+</code></pre></div></div>
+
+<h3 id="getting-help">Getting help</h3>
+
+<p><code class="language-plaintext highlighter-rouge">ls</code> has lots of other <strong>options</strong>. There are two common ways to find out how
+to use a command and what options it accepts:</p>
+
+<ol>
+  <li>We can pass a <code class="language-plaintext highlighter-rouge">--help</code> option to the command, such as:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">ls</span> <span class="nt">--help</span>
+</code></pre></div>    </div>
+  </li>
+  <li>We can read its manual with <code class="language-plaintext highlighter-rouge">man</code>, such as:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>man <span class="nb">ls</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Depending on your environment you might find that only one of these works
+(either <code class="language-plaintext highlighter-rouge">man</code> or <code class="language-plaintext highlighter-rouge">--help</code>, eg. <code class="language-plaintext highlighter-rouge">man</code> works for macOS and <code class="language-plaintext highlighter-rouge">--help</code> typically works for Git Bash).</strong></p>
+
+<p>We’ll describe both ways below.</p>
+
+<h4 id="the---help-option">The <code class="language-plaintext highlighter-rouge">--help</code> option</h4>
+
+<p>Many bash commands, and programs that people have written that can be
+run from within bash, support a <code class="language-plaintext highlighter-rouge">--help</code> option to display more
+information on how to use the command or program.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">--help</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+Mandatory arguments to long options are mandatory for short options too.
+  -a, --all                  do not ignore entries starting with .
+  -A, --almost-all           do not list implied . and ..
+      --author               with -l, print the author of each file
+  -b, --escape               print C-style escapes for nongraphic characters
+      --block-size=SIZE      scale sizes by SIZE before printing them; e.g.,
+                               '--block-size=M' prints sizes in units of
+                               1,048,576 bytes; see SIZE format below
+  -B, --ignore-backups       do not list implied entries ending with ~
+  -c                         with -lt: sort by, and show, ctime (time of last
+                               modification of file status information);
+                               with -l: show ctime and sort by name;
+                               otherwise: sort by ctime, newest first
+  -C                         list entries by columns
+      --color[=WHEN]         colorize the output; WHEN can be 'always' (default
+                               if omitted), 'auto', or 'never'; more info below
+  -d, --directory            list directories themselves, not their contents
+  -D, --dired                generate output designed for Emacs' dired mode
+  -f                         do not sort, enable -aU, disable -ls --color
+  -F, --classify             append indicator (one of */=&gt;@|) to entries
+      --file-type            likewise, except do not append '*'
+      --format=WORD          across -x, commas -m, horizontal -x, long -l,
+                               single-column -1, verbose -l, vertical -C
+      --full-time            like -l --time-style=full-iso
+  -g                         like -l, but do not list owner
+      --group-directories-first
+                             group directories before files;
+                               can be augmented with a --sort option, but any
+                               use of --sort=none (-U) disables grouping
+  -G, --no-group             in a long listing, don't print group names
+  -h, --human-readable       with -l and/or -s, print human readable sizes
+                               (e.g., 1K 234M 2G)
+      --si                   likewise, but use powers of 1000 not 1024
+  -H, --dereference-command-line
+                             follow symbolic links listed on the command line
+      --dereference-command-line-symlink-to-dir
+                             follow each command line symbolic link
+                               that points to a directory
+      --hide=PATTERN         do not list implied entries matching shell PATTERN
+                               (overridden by -a or -A)
+      --indicator-style=WORD  append indicator with style WORD to entry names:
+                               none (default), slash (-p),
+                               file-type (--file-type), classify (-F)
+  -i, --inode                print the index number of each file
+  -I, --ignore=PATTERN       do not list implied entries matching shell PATTERN
+  -k, --kibibytes            default to 1024-byte blocks for disk usage
+  -l                         use a long listing format
+  -L, --dereference          when showing file information for a symbolic
+                               link, show information for the file the link
+                               references rather than for the link itself
+  -m                         fill width with a comma separated list of entries
+  -n, --numeric-uid-gid      like -l, but list numeric user and group IDs
+  -N, --literal              print raw entry names (don't treat e.g. control
+                               characters specially)
+  -o                         like -l, but do not list group information
+  -p, --indicator-style=slash
+                             append / indicator to directories
+  -q, --hide-control-chars   print ? instead of nongraphic characters
+      --show-control-chars   show nongraphic characters as-is (the default,
+                               unless program is 'ls' and output is a terminal)
+  -Q, --quote-name           enclose entry names in double quotes
+      --quoting-style=WORD   use quoting style WORD for entry names:
+                               literal, locale, shell, shell-always,
+                               shell-escape, shell-escape-always, c, escape
+  -r, --reverse              reverse order while sorting
+  -R, --recursive            list subdirectories recursively
+  -s, --size                 print the allocated size of each file, in blocks
+  -S                         sort by file size, largest first
+      --sort=WORD            sort by WORD instead of name: none (-U), size (-S),
+                               time (-t), version (-v), extension (-X)
+      --time=WORD            with -l, show time as WORD instead of default
+                               modification time: atime or access or use (-u);
+                               ctime or status (-c); also use specified time
+                               as sort key if --sort=time (newest first)
+      --time-style=STYLE     with -l, show times using style STYLE:
+                               full-iso, long-iso, iso, locale, or +FORMAT;
+                               FORMAT is interpreted like in 'date'; if FORMAT
+                               is FORMAT1&lt;newline&gt;FORMAT2, then FORMAT1 applies
+                               to non-recent files and FORMAT2 to recent files;
+                               if STYLE is prefixed with 'posix-', STYLE
+                               takes effect only outside the POSIX locale
+  -t                         sort by modification time, newest first
+  -T, --tabsize=COLS         assume tab stops at each COLS instead of 8
+  -u                         with -lt: sort by, and show, access time;
+                               with -l: show access time and sort by name;
+                               otherwise: sort by access time, newest first
+  -U                         do not sort; list entries in directory order
+  -v                         natural sort of (version) numbers within text
+  -w, --width=COLS           set output width to COLS.  0 means no limit
+  -x                         list entries by lines instead of by columns
+  -X                         sort alphabetically by entry extension
+  -Z, --context              print any security context of each file
+  -1                         list one file per line.  Avoid '\n' with -q or -b
+      --help     display this help and exit
+      --version  output version information and exit
+
+The SIZE argument is an integer and optional unit (example: 10K is 10*1024).
+Units are K,M,G,T,P,E,Z,Y (powers of 1024) or KB,MB,... (powers of 1000).
+
+Using color to distinguish file types is disabled both by default and
+with --color=never.  With --color=auto, ls emits color codes only when
+standard output is connected to a terminal.  The LS_COLORS environment
+variable can change the settings.  Use the dircolors command to set it.
+
+Exit status:
+ 0  if OK,
+ 1  if minor problems (e.g., cannot access subdirectory),
+ 2  if serious trouble (e.g., cannot access command-line argument).
+
+GNU coreutils online help: &lt;http://www.gnu.org/software/coreutils/&gt;
+Full documentation at: &lt;http://www.gnu.org/software/coreutils/ls&gt;
+or available locally via: info '(coreutils) ls invocation'
+</code></pre></div></div>
+
+<blockquote class="callout">
+  <h2 id="unsupported-command-line-options">Unsupported command-line options</h2>
+  <p>If you try to use an option (flag) that is not supported, <code class="language-plaintext highlighter-rouge">ls</code> and other commands
+will usually print an error message similar to:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-j</span>
+</code></pre></div>  </div>
+
+  <div class="language-plaintext error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls: invalid option -- 'j'
+Try 'ls --help' for more information.
+</code></pre></div>  </div>
+</blockquote>
+
+<h4 id="the-man-command">The <code class="language-plaintext highlighter-rouge">man</code> command</h4>
+
+<p>The other way to learn about <code class="language-plaintext highlighter-rouge">ls</code> is to type</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>man <span class="nb">ls</span>
+</code></pre></div></div>
+
+<p>This will turn your terminal into a page with a description
+of the <code class="language-plaintext highlighter-rouge">ls</code> command and its options and, if you’re lucky, some examples
+of how to use it.</p>
+
+<p>To navigate through the <code class="language-plaintext highlighter-rouge">man</code> pages,
+you may use <kbd>↑</kbd> and <kbd>↓</kbd> to move line-by-line,
+or try <kbd>B</kbd> and <kbd>Spacebar</kbd> to skip up and down by a full page.
+To search for a character or word in the <code class="language-plaintext highlighter-rouge">man</code> pages,
+use <kbd>/</kbd> followed by the character or word you are searching for.
+Sometimes a search will result in multiple hits.  If so, you can move between hits using <kbd>N</kbd> (for moving forward) and <kbd>Shift</kbd>+<kbd>N</kbd> (for moving backward).</p>
+
+<p>To <strong>quit</strong> the <code class="language-plaintext highlighter-rouge">man</code> pages, press <kbd>Q</kbd>.</p>
+
+<blockquote class="callout">
+  <h2 id="manual-pages-on-the-web">Manual pages on the web</h2>
+
+  <p>Of course there is a third way to access help for commands:
+searching the internet via your web browser.
+When using internet search, including the phrase <code class="language-plaintext highlighter-rouge">unix man page</code> in your search
+query will help to find relevant results.</p>
+
+  <p>GNU provides links to its
+<a href="http://www.gnu.org/manual/manual.html">manuals</a> including the
+<a href="http://www.gnu.org/software/coreutils/manual/coreutils.html">core GNU utilities</a>,
+which covers many commands introduced within this lesson.</p>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="exploring-more-ls-flags">Exploring More <code class="language-plaintext highlighter-rouge">ls</code> Flags</h2>
+
+  <p>You can also use two options at the same time. What does the command <code class="language-plaintext highlighter-rouge">ls</code> do when used
+with the <code class="language-plaintext highlighter-rouge">-l</code> option? What about if you use both the <code class="language-plaintext highlighter-rouge">-l</code> and the <code class="language-plaintext highlighter-rouge">-h</code> option?</p>
+
+  <p>Some of its output is about properties that we do not cover in this lesson (such
+as file permissions and ownership), but the rest should be useful
+nevertheless.</p>
+
+  <blockquote class="solution">
+    <h2 id="solution">Solution<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+    <p style="display: none;">The <code class="language-plaintext highlighter-rouge">-l</code> option makes <code class="language-plaintext highlighter-rouge">ls</code> use a <strong>l</strong>ong listing format, showing not only
+the file/directory names but also additional information such as the file size
+and the time of its last modification. If you use both the <code class="language-plaintext highlighter-rouge">-h</code> option and the <code class="language-plaintext highlighter-rouge">-l</code> option,
+this makes the file size ‘<strong>h</strong>uman readable’, i.e. displaying something like <code class="language-plaintext highlighter-rouge">5.3K</code>
+instead of <code class="language-plaintext highlighter-rouge">5369</code>.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="listing-in-reverse-chronological-order">Listing in Reverse Chronological Order</h2>
+
+  <p>By default <code class="language-plaintext highlighter-rouge">ls</code> lists the contents of a directory in alphabetical
+order by name. The command <code class="language-plaintext highlighter-rouge">ls -t</code> lists items by time of last
+change instead of alphabetically. The command <code class="language-plaintext highlighter-rouge">ls -r</code> lists the
+contents of a directory in reverse order.
+Which file is displayed last when you combine the <code class="language-plaintext highlighter-rouge">-t</code> and <code class="language-plaintext highlighter-rouge">-r</code> flags?
+Hint: You may need to use the <code class="language-plaintext highlighter-rouge">-l</code> flag to see the
+last changed dates.</p>
+
+  <blockquote class="solution">
+    <h2 id="solution-1">Solution<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+    <p style="display: none;">The most recently changed file is listed last when using <code class="language-plaintext highlighter-rouge">-rt</code>. This
+can be very useful for finding your most recent edits or checking to
+see if a new output file was written.</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="exploring-other-directories">Exploring Other Directories</h3>
+
+<p>Not only can we use <code class="language-plaintext highlighter-rouge">ls</code> on the current working directory, but we can use it to list the contents of a different directory.  Let’s take a
+look at our <code class="language-plaintext highlighter-rouge">Desktop</code> directory by running <code class="language-plaintext highlighter-rouge">ls -F Desktop</code>,
+i.e.,
+the command <code class="language-plaintext highlighter-rouge">ls</code> with the <code class="language-plaintext highlighter-rouge">-F</code> <strong>option</strong> and the <strong>argument</strong>  <code class="language-plaintext highlighter-rouge">Desktop</code>.
+The argument <code class="language-plaintext highlighter-rouge">Desktop</code> tells <code class="language-plaintext highlighter-rouge">ls</code> that
+we want a listing of something other than our current working directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-F</span> Desktop
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data-shell/
+</code></pre></div></div>
+
+<p>Your output should be a list of all the files and sub-directories in your
+Desktop directory, including the <code class="language-plaintext highlighter-rouge">data-shell</code> directory you downloaded at
+the <a href="http://swcarpentry.github.io/shell-novice/setup.html">setup for this lesson</a>.
+On many systems,
+the command line Desktop directory is the same as your GUI Desktop.
+Take a look at your Desktop to confirm that your output is accurate.</p>
+
+<p>As you may now see, using a bash shell is strongly dependent on the idea that
+your files are organized in a hierarchical file system.
+Organizing things hierarchically in this way helps us keep track of our work:
+it’s possible to put hundreds of files in our home directory,
+just as it’s possible to pile hundreds of printed papers on our desk,
+but it’s a self-defeating strategy.</p>
+
+<p>Now that we know the <code class="language-plaintext highlighter-rouge">data-shell</code> directory is located in our Desktop directory, we
+can do two things.</p>
+
+<p>First, we can look at its contents, using the same strategy as before, passing
+a directory name to <code class="language-plaintext highlighter-rouge">ls</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-F</span> Desktop/data-shell
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>creatures/          molecules/          notes.txt           solar.pdf
+data/               north-pacific-gyre/ pizza.cfg           writing/
+</code></pre></div></div>
+
+<p>Second, we can actually change our location to a different directory, so
+we are no longer located in
+our home directory.</p>
+
+<p>The command to change locations is <code class="language-plaintext highlighter-rouge">cd</code> followed by a
+directory name to change our working directory.
+<code class="language-plaintext highlighter-rouge">cd</code> stands for ‘change directory’,
+which is a bit misleading:
+the command doesn’t change the directory,
+it changes the shell’s idea of what directory we are in.</p>
+
+<p>Let’s say we want to move to the <code class="language-plaintext highlighter-rouge">data</code> directory we saw above.  We can
+use the following series of commands to get there:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>Desktop
+<span class="nv">$ </span><span class="nb">cd </span>data-shell
+<span class="nv">$ </span><span class="nb">cd </span>data
+</code></pre></div></div>
+
+<p>These commands will move us from our home directory into our Desktop directory, then into
+the <code class="language-plaintext highlighter-rouge">data-shell</code> directory, then into the <code class="language-plaintext highlighter-rouge">data</code> directory.  You will notice that <code class="language-plaintext highlighter-rouge">cd</code> doesn’t print anything.  This is normal.  Many shell commands will not output anything to the screen when successfully executed.  But if we run <code class="language-plaintext highlighter-rouge">pwd</code> after it, we can see that we are now
+in <code class="language-plaintext highlighter-rouge">/Users/nelle/Desktop/data-shell/data</code>.
+If we run <code class="language-plaintext highlighter-rouge">ls -F</code> without arguments now,
+it lists the contents of <code class="language-plaintext highlighter-rouge">/Users/nelle/Desktop/data-shell/data</code>,
+because that’s where we now are:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/nelle/Desktop/data-shell/data
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-F</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>amino-acids.txt   elements/     pdb/	        salmon.txt
+animals.txt       morse.txt     planets.txt     sunspot.txt
+</code></pre></div></div>
+
+<p>We now know how to go down the directory tree (i.e. how to go into a subdirectory)
+but how do we go up (i.e. how do we leave a directory and go into its parent directory)?
+We might try the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>data-shell
+</code></pre></div></div>
+
+<div class="language-plaintext error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash: cd: data-shell: No such file or directory
+</code></pre></div></div>
+
+<p>But we get an error!  Why is this?</p>
+
+<p>With our methods so far,
+<code class="language-plaintext highlighter-rouge">cd</code> can only see sub-directories inside your current directory.  There are
+different ways to see directories above your current location; we’ll start
+with the simplest.</p>
+
+<p>There is a shortcut in the shell to move up one directory level
+that looks like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ..
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">..</code> is a special directory name meaning
+“the directory containing this one”,
+or more succinctly,
+the <strong>parent</strong> of the current directory.
+Sure enough,
+if we run <code class="language-plaintext highlighter-rouge">pwd</code> after running <code class="language-plaintext highlighter-rouge">cd ..</code>, we’re back in <code class="language-plaintext highlighter-rouge">/Users/nelle/Desktop/data-shell</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/nelle/Desktop/data-shell
+</code></pre></div></div>
+
+<p>The special directory <code class="language-plaintext highlighter-rouge">..</code> doesn’t usually show up when we run <code class="language-plaintext highlighter-rouge">ls</code>.  If we want
+to display it, we can add the <code class="language-plaintext highlighter-rouge">-a</code> option to <code class="language-plaintext highlighter-rouge">ls -F</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-F</span> <span class="nt">-a</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./   .bash_profile  data/       north-pacific-gyre/  pizza.cfg  thesis/
+../  creatures/     molecules/  notes.txt            solar.pdf  writing/
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-a</code> stands for ‘show all’;
+it forces <code class="language-plaintext highlighter-rouge">ls</code> to show us file and directory names that begin with <code class="language-plaintext highlighter-rouge">.</code>,
+such as <code class="language-plaintext highlighter-rouge">..</code> (which, if we’re in <code class="language-plaintext highlighter-rouge">/Users/nelle</code>, refers to the <code class="language-plaintext highlighter-rouge">/Users</code> directory)
+As you can see,
+it also displays another special directory that’s just called <code class="language-plaintext highlighter-rouge">.</code>,
+which means ‘the current working directory’.
+It may seem redundant to have a name for it,
+but we’ll see some uses for it soon.</p>
+
+<p>Note that in most command line tools, multiple options can be combined
+with a single <code class="language-plaintext highlighter-rouge">-</code> and no spaces between the options: <code class="language-plaintext highlighter-rouge">ls -F -a</code> is
+equivalent to <code class="language-plaintext highlighter-rouge">ls -Fa</code>.</p>
+
+<blockquote class="callout">
+  <h2 id="other-hidden-files">Other Hidden Files</h2>
+
+  <p>In addition to the hidden directories <code class="language-plaintext highlighter-rouge">..</code> and <code class="language-plaintext highlighter-rouge">.</code>, you may also see a file
+called <code class="language-plaintext highlighter-rouge">.bash_profile</code>. This file usually contains shell configuration
+settings. You may also see other files and directories beginning
+with <code class="language-plaintext highlighter-rouge">.</code>. These are usually files and directories that are used to configure
+different programs on your computer. The prefix <code class="language-plaintext highlighter-rouge">.</code> is used to prevent these
+configuration files from cluttering the terminal when a standard <code class="language-plaintext highlighter-rouge">ls</code> command
+is used.</p>
+</blockquote>
+
+<blockquote class="callout">
+  <h2 id="orthogonality">Orthogonality</h2>
+
+  <p>The special names <code class="language-plaintext highlighter-rouge">.</code> and <code class="language-plaintext highlighter-rouge">..</code> don’t belong to <code class="language-plaintext highlighter-rouge">cd</code>;
+they are interpreted the same way by every program.
+For example,
+if we are in <code class="language-plaintext highlighter-rouge">/Users/nelle/data</code>,
+the command <code class="language-plaintext highlighter-rouge">ls ..</code> will give us a listing of <code class="language-plaintext highlighter-rouge">/Users/nelle</code>.
+When the meanings of the parts are the same no matter how they’re combined,
+programmers say they are <strong>orthogonal</strong>:
+Orthogonal systems tend to be easier for people to learn
+because there are fewer special cases and exceptions to keep track of.</p>
+</blockquote>
+
+<p>These then, are the basic commands for navigating the filesystem on your computer:
+<code class="language-plaintext highlighter-rouge">pwd</code>, <code class="language-plaintext highlighter-rouge">ls</code> and <code class="language-plaintext highlighter-rouge">cd</code>.  Let’s explore some variations on those commands.  What happens
+if you type <code class="language-plaintext highlighter-rouge">cd</code> on its own, without giving
+a directory?</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span>
+</code></pre></div></div>
+
+<p>How can you check what happened?  <code class="language-plaintext highlighter-rouge">pwd</code> gives us the answer!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/nelle
+</code></pre></div></div>
+
+<p>It turns out that <code class="language-plaintext highlighter-rouge">cd</code> without an argument will return you to your home directory,
+which is great if you’ve gotten lost in your own filesystem.</p>
+
+<p>Let’s try returning to the <code class="language-plaintext highlighter-rouge">data</code> directory from before.  Last time, we used
+three commands, but we can actually string together the list of directories
+to move to <code class="language-plaintext highlighter-rouge">data</code> in one step:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>Desktop/data-shell/data
+</code></pre></div></div>
+
+<p>Check that we’ve moved to the right place by running <code class="language-plaintext highlighter-rouge">pwd</code> and <code class="language-plaintext highlighter-rouge">ls -F</code></p>
+
+<p>If we want to move up one level from the data directory, we could use <code class="language-plaintext highlighter-rouge">cd ..</code>.  But
+there is another way to move to any directory, regardless of your
+current location.</p>
+
+<p>So far, when specifying directory names, or even a directory path (as above),
+we have been using <strong>relative paths</strong>.  When you use a relative path with a command
+like <code class="language-plaintext highlighter-rouge">ls</code> or <code class="language-plaintext highlighter-rouge">cd</code>, it tries to find that location  from where we are,
+rather than from the root of the file system.</p>
+
+<p>However, it is possible to specify the <strong>absolute path</strong> to a directory by
+including its entire path from the root directory, which is indicated by a
+leading slash.  The leading <code class="language-plaintext highlighter-rouge">/</code> tells the computer to follow the path from
+the root of the file system, so it always refers to exactly one directory,
+no matter where we are when we run the command.</p>
+
+<p>This allows us to move to our <code class="language-plaintext highlighter-rouge">data-shell</code> directory from anywhere on
+the filesystem (including from inside <code class="language-plaintext highlighter-rouge">data</code>).  To find the absolute path
+we’re looking for, we can use <code class="language-plaintext highlighter-rouge">pwd</code> and then extract the piece we need
+to move to <code class="language-plaintext highlighter-rouge">data-shell</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/nelle/Desktop/data-shell/data
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /Users/nelle/Desktop/data-shell
+</code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">pwd</code> and <code class="language-plaintext highlighter-rouge">ls -F</code> to ensure that we’re in the directory we expect.</p>
+
+<blockquote class="callout">
+  <h2 id="two-more-shortcuts">Two More Shortcuts</h2>
+
+  <p>The shell interprets the character <code class="language-plaintext highlighter-rouge">~</code> (tilde) at the start of a path to
+mean “the current user’s home directory”. For example, if Nelle’s home
+directory is <code class="language-plaintext highlighter-rouge">/Users/nelle</code>, then <code class="language-plaintext highlighter-rouge">~/data</code> is equivalent to
+<code class="language-plaintext highlighter-rouge">/Users/nelle/data</code>. This only works if it is the first character in the
+path: <code class="language-plaintext highlighter-rouge">here/there/~/elsewhere</code> is <em>not</em> <code class="language-plaintext highlighter-rouge">here/there/Users/nelle/elsewhere</code>.</p>
+
+  <p>Another shortcut is the <code class="language-plaintext highlighter-rouge">-</code> (dash) character.  <code class="language-plaintext highlighter-rouge">cd</code> will translate <code class="language-plaintext highlighter-rouge">-</code> into
+<em>the previous directory I was in</em>, which is faster than having to remember,
+then type, the full path.  This is a <em>very</em> efficient way of moving back
+and forth between directories. The difference between <code class="language-plaintext highlighter-rouge">cd ..</code> and <code class="language-plaintext highlighter-rouge">cd -</code> is
+that the former brings you <em>up</em>, while the latter brings you <em>back</em>. You can
+think of it as the <em>Last Channel</em> button on a TV remote.</p>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="absolute-vs-relative-paths">Absolute vs Relative Paths</h2>
+
+  <p>Starting from <code class="language-plaintext highlighter-rouge">/Users/amanda/data</code>,
+which of the following commands could Amanda use to navigate to her home directory,
+which is <code class="language-plaintext highlighter-rouge">/Users/amanda</code>?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">cd .</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd /</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd /home/amanda</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ../..</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ~</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd home</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ~/data/..</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd</code></li>
+    <li><code class="language-plaintext highlighter-rouge">cd ..</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h2 id="solution-2">Solution<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+    <ol style="display: none;">
+      <li>No: <code class="language-plaintext highlighter-rouge">.</code> stands for the current directory.</li>
+      <li>No: <code class="language-plaintext highlighter-rouge">/</code> stands for the root directory.</li>
+      <li>No: Amanda’s home directory is <code class="language-plaintext highlighter-rouge">/Users/amanda</code>.</li>
+      <li>No: this goes up two levels, i.e. ends in <code class="language-plaintext highlighter-rouge">/Users</code>.</li>
+      <li>Yes: <code class="language-plaintext highlighter-rouge">~</code> stands for the user’s home directory, in this case <code class="language-plaintext highlighter-rouge">/Users/amanda</code>.</li>
+      <li>No: this would navigate into a directory <code class="language-plaintext highlighter-rouge">home</code> in the current directory if it exists.</li>
+      <li>Yes: unnecessarily complicated, but correct.</li>
+      <li>Yes: shortcut to go back to the user’s home directory.</li>
+      <li>Yes: goes up one level.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="relative-path-resolution">Relative Path Resolution</h2>
+
+  <p>Using the filesystem diagram below, if <code class="language-plaintext highlighter-rouge">pwd</code> displays <code class="language-plaintext highlighter-rouge">/Users/thing</code>,
+what will <code class="language-plaintext highlighter-rouge">ls -F ../backup</code> display?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">../backup: No such file or directory</code></li>
+    <li><code class="language-plaintext highlighter-rouge">2012-12-01 2013-01-08 2013-01-27</code></li>
+    <li><code class="language-plaintext highlighter-rouge">2012-12-01/ 2013-01-08/ 2013-01-27/</code></li>
+    <li><code class="language-plaintext highlighter-rouge">original/ pnas_final/ pnas_sub/</code></li>
+  </ol>
+
+  <p><img src="./02-filedir_files/filesystem-challenge.svg" alt="File System for Challenge Questions"></p>
+
+  <blockquote class="solution">
+    <h2 id="solution-3">Solution<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+    <ol style="display: none;">
+      <li>No: there <em>is</em> a directory <code class="language-plaintext highlighter-rouge">backup</code> in <code class="language-plaintext highlighter-rouge">/Users</code>.</li>
+      <li>No: this is the content of <code class="language-plaintext highlighter-rouge">Users/thing/backup</code>,
+but with <code class="language-plaintext highlighter-rouge">..</code> we asked for one level further up.</li>
+      <li>No: see previous explanation.</li>
+      <li>Yes: <code class="language-plaintext highlighter-rouge">../backup/</code> refers to <code class="language-plaintext highlighter-rouge">/Users/backup/</code>.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="ls-reading-comprehension"><code class="language-plaintext highlighter-rouge">ls</code> Reading Comprehension</h2>
+
+  <p>Using the filesystem diagram below,
+if <code class="language-plaintext highlighter-rouge">pwd</code> displays <code class="language-plaintext highlighter-rouge">/Users/backup</code>,
+and <code class="language-plaintext highlighter-rouge">-r</code> tells <code class="language-plaintext highlighter-rouge">ls</code> to display things in reverse order,
+what command(s) will result in the following output:</p>
+
+  <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pnas_sub/ pnas_final/ original/
+</code></pre></div>  </div>
+
+  <p><img src="./02-filedir_files/filesystem-challenge.svg" alt="File System for Challenge Questions"></p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">ls pwd</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ls -r -F</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ls -r -F /Users/backup</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h2 id="solution-4">Solution<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+    <ol style="display: none;">
+      <li>No: <code class="language-plaintext highlighter-rouge">pwd</code> is not the name of a directory.</li>
+      <li>Yes: <code class="language-plaintext highlighter-rouge">ls</code> without directory argument lists files and directories
+in the current directory.</li>
+      <li>Yes: uses the absolute path explicitly.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h3 id="nelles-pipeline-organizing-files">Nelle’s Pipeline: Organizing Files</h3>
+
+<p>Knowing this much about files and directories,
+Nelle is ready to organize the files that the protein assay machine will create.
+First,
+she creates a directory called <code class="language-plaintext highlighter-rouge">north-pacific-gyre</code>
+(to remind herself where the data came from).
+Inside that,
+she creates a directory called <code class="language-plaintext highlighter-rouge">2012-07-03</code>,
+which is the date she started processing the samples.
+She used to use names like <code class="language-plaintext highlighter-rouge">conference-paper</code> and <code class="language-plaintext highlighter-rouge">revised-results</code>,
+but she found them hard to understand after a couple of years.
+(The final straw was when she found herself creating
+a directory called <code class="language-plaintext highlighter-rouge">revised-revised-results-3</code>.)</p>
+
+<blockquote class="callout">
+  <h2 id="sorting-output">Sorting Output</h2>
+
+  <p>Nelle names her directories ‘year-month-day’,
+with leading zeroes for months and days,
+because the shell displays file and directory names in alphabetical order.
+If she used month names,
+December would come before July;
+if she didn’t use leading zeroes,
+November (‘11’) would come before July (‘7’). Similarly, putting the year first
+means that June 2012 will come before June 2013.</p>
+</blockquote>
+
+<p>Each of her physical samples is labelled according to her lab’s convention
+with a unique ten-character ID,
+such as ‘NENE01729A’.
+This is what she used in her collection log
+to record the location, time, depth, and other characteristics of the sample,
+so she decides to use it as part of each data file’s name.
+Since the assay machine’s output is plain text,
+she will call her files <code class="language-plaintext highlighter-rouge">NENE01729A.txt</code>, <code class="language-plaintext highlighter-rouge">NENE01812A.txt</code>, and so on.
+All 1520 files will go into the same directory.</p>
+
+<p>Now in her current directory <code class="language-plaintext highlighter-rouge">data-shell</code>,
+Nelle can see what files she has using the command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls </span>north-pacific-gyre/2012-07-03/
+</code></pre></div></div>
+
+<p>This is a lot to type,
+but she can let the shell do most of the work through what is called <strong>tab completion</strong>.
+If she types:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls </span>nor
+</code></pre></div></div>
+
+<p>and then presses <kbd>Tab</kbd> (the tab key on her keyboard),
+the shell automatically completes the directory name for her:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls </span>north-pacific-gyre/
+</code></pre></div></div>
+
+<p>If she presses <kbd>Tab</kbd> again,
+Bash will add <code class="language-plaintext highlighter-rouge">2012-07-03/</code> to the command,
+since it’s the only possible completion.
+Pressing <kbd>Tab</kbd> again does nothing,
+since there are 19 possibilities;
+pressing <kbd>Tab</kbd> twice brings up a list of all the files,
+and so on.
+This is called <strong>tab completion</strong>,
+and we will see it in many other tools as we go on.</p>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>The file system is responsible for managing information on the disk.</p>
+</li>
+    
+    <li><p>Information is stored in files, which are stored in directories (folders).</p>
+</li>
+    
+    <li><p>Directories can also store other directories, which forms a directory tree.</p>
+</li>
+    
+    <li><p><code class="language-plaintext highlighter-rouge">cd path</code> changes the current working directory.</p>
+</li>
+    
+    <li><p><code class="language-plaintext highlighter-rouge">ls path</code> prints a listing of a specific file or directory; <code class="language-plaintext highlighter-rouge">ls</code> on its own lists the current working directory.</p>
+</li>
+    
+    <li><p><code class="language-plaintext highlighter-rouge">pwd</code> prints the user’s current working directory.</p>
+</li>
+    
+    <li><p><code class="language-plaintext highlighter-rouge">/</code> on its own is the root directory of the whole file system.</p>
+</li>
+    
+    <li><p>A relative path specifies a location starting from the current location.</p>
+</li>
+    
+    <li><p>An absolute path specifies a location from the root of the file system.</p>
+</li>
+    
+    <li><p>Directory names in a path are separated with <code class="language-plaintext highlighter-rouge">/</code> on Unix, but <code class="language-plaintext highlighter-rouge">\</code> on Windows.</p>
+</li>
+    
+    <li><p><code class="language-plaintext highlighter-rouge">..</code> means ‘the directory above the current one’; <code class="language-plaintext highlighter-rouge">.</code> on its own means ‘the current directory’.</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Manual ordering of Episodes begins here -->
+
+
+
+
+
+
+
+
+  
+  
+
+
+<!-- Manual ordering of Extras begins here -->
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="./01-intro.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="./03-create.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <div class="row">
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script async="" src="../js/analytics.js.download"></script><script src="../js/jquery.min.js.download"></script>
+<script src="../js/bootstrap.min.js.download"></script>
+<script src="../js/lesson.js.download"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  
+
+</body></html>

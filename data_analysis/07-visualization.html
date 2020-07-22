@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)https://datacarpentry.org/python-ecology-lesson/07-visualization-ggplot-python/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2020-06-23 13:47:10 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="http://pzindel.github.io/LanternPython">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/lesson.css">
+    <link rel="stylesheet" type="text/css" href="../css/syntax.css">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+  <title>
+  Making Plots With plotnine – Data Analysis and Visualization in Python for Ecologists
+  </title>  
+
+  </head>
+  <body>
+
+    
+
+
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      
+      
+
+      
+      <a class="navbar-brand" href="../index.html">Home</a>
+
+    </div>
+    <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1" aria-expanded="true" style="">
+      <ul class="nav navbar-nav">
+
+        
+        <li class="dropdown">
+          <a href="../unix/01-intro.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">The Unix Shell <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="../unix/01-intro.html">Introducing the Shell</a></li>
+            
+            
+            <li><a href="../unix/02-filedir.html">Navigating Files and Directories</a></li>
+            
+            
+            <li><a href="../unix/03-create.html">Working With Files and Directories</a></li>
+            
+            
+            <li><a href="../unix/04-pipefilter.html">Pipes and Filters</a></li>
+            
+            
+            <li><a href="../unix/05-loop.html">Loops</a></li>
+            
+            
+            <li><a href="../unix/06-script.html">Shell Scripts</a></li>
+            
+            
+            <li><a href="../unix/07-find.html">Finding Things</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../unix/aio.html">All in one page</a></li>
+          </ul>
+        </li>
+	        
+		
+		<li class="dropdown">
+          <a href="../python/01-intro.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Programming with Python <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="../python/01-intro.html">Python Fundamentals</a></li>
+            
+            
+            <li><a href="../python/02-numpy.html">Analyzing Patient Data</a></li>
+            
+            
+            <li><a href="../python/03-matplotlib.html">Visualizing Tabular Data</a></li>
+            
+            
+            <li><a href="../python/04-loop.html">Repeating Actions with Loops</a></li>
+            
+            
+            <li><a href="../python/05-lists.html">Storing Multiple Values in Lists</a></li>
+            
+            
+            <li><a href="../python/06-files.html">Analyzing Data from Multiple Files</a></li>
+            
+            
+            <li><a href="../python/07-cond.html">Making Choices</a></li>
+            
+            
+            <li><a href="../python/08-func.html">Creating Functions</a></li>
+            
+            
+            <li><a href="../python/09-errors.html">Errors and Exceptions</a></li>
+            
+            
+            <li><a href="../python/10-defensive.html">Defensive Programming</a></li>
+            
+            
+            <li><a href="../python/11-debugging.html">Debugging</a></li>
+            
+            
+            <li><a href="../python/12-cmdline.html">Command-Line Programs</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../python/aio.html">All in one page</a></li>
+          </ul>
+        </li>
+	
+
+		<li class="dropdown">
+          <a href="._analysis/01-intro-to-python.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Analysis <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="./00-before-we-start.html">Before we start</a></li>
+            
+            
+            <li><a href="./01-intro-to-python.html">Short Introduction to Programming in Python</a></li>
+            
+            
+            <li><a href="./02-starting-with-data.html">Starting With Data</a></li>
+            
+            
+            <li><a href="./03-index-slice-subset.html">Indexing, Slicing and Subsetting DataFrames in Python</a></li>
+            
+            
+            <li><a href="./04-data-types.html">Data Types and Formats</a></li>
+            
+            
+            <li><a href="./05-merging-data.html">Combining DataFrames with Pandas</a></li>
+            
+            
+            <li><a href="./06-loops-and-functions.html">Data Workflows and Automation</a></li>
+            
+            
+            <li><a href="./07-visualization.html">Making Plots With plotnine</a></li>
+            
+            
+            <li><a href="./08-all-together.html">Data Ingest and Visualization - Matplotlib and Pandas</a></li>
+            
+            
+            <li><a href="./09-working-with-sql.html">Accessing SQLite Databases Using Python and Pandas</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="./aio.html">All in one page</a></li>
+          </ul>
+        </li>
+
+        <li><a href="../licenses.html">License</a></li>
+	
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="./06-loops-and-functions.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../index.html#data">Data Analysis and Visualization in Python for Ecologists</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="./08-all-together.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Making Plots With plotnine</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 40 min
+      <br>
+      <strong>Exercises:</strong> 50 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How can I visualize data in Python?</p>
+</li>
+	
+	<li><p>What is ‘grammar of graphics’?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Create a <code class="language-plaintext highlighter-rouge">plotnine</code> object.</p>
+</li>
+	
+	<li><p>Set universal plot settings.</p>
+</li>
+	
+	<li><p>Modify an existing plotnine object.</p>
+</li>
+	
+	<li><p>Change the aesthetics of a plot such as color.</p>
+</li>
+	
+	<li><p>Edit the axis labels.</p>
+</li>
+	
+	<li><p>Build complex plots using a step-by-step approach.</p>
+</li>
+	
+	<li><p>Create scatter plots, box plots, and time series plots.</p>
+</li>
+	
+	<li><p>Use the facet_wrap and facet_grid commands to create a collection of plots splitting the data by a factor variable.</p>
+</li>
+	
+	<li><p>Create customized plot styles to meet their needs.</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>Python has powerful built-in plotting capabilities such as <code class="language-plaintext highlighter-rouge">matplotlib</code>, but for
+this episode, we will be using the <a href="https://plotnine.readthedocs.io/en/stable"><code class="language-plaintext highlighter-rouge">plotnine</code></a>
+package, which facilitates the creation of highly-informative plots of
+structured data based on the R implementation of <a href="https://ggplot2.tidyverse.org/"><code class="language-plaintext highlighter-rouge">ggplot2</code></a>
+and <a href="http://link.springer.com/book/10.1007%2F0-387-28695-0">The Grammar of Graphics</a>
+by Leland Wilkinson. The <code class="language-plaintext highlighter-rouge">plotnine</code>
+package is built on top of Matplotlib and interacts well with Pandas.</p>
+
+<blockquote class="callout">
+  <h2 id="reminder">Reminder</h2>
+  <p><code class="language-plaintext highlighter-rouge">plotnine</code> is not included in the standard Anaconda installation and needs
+to be installed separately. If you haven’t done so already, you can find installation
+instructions on the <a href="./setup.html#download-plotting-package">Setup page</a>.</p>
+</blockquote>
+
+<p>Just as with the other packages, <code class="language-plaintext highlighter-rouge">plotnine</code> needs to be imported. It is good
+practice to not just load an entire package such as <code class="language-plaintext highlighter-rouge">from plotnine import *</code>,
+but to use an abbreviation as we used <code class="language-plaintext highlighter-rouge">pd</code> for Pandas:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">plotnine</span> <span class="k">as</span> <span class="n">p9</span>
+</code></pre></div></div>
+
+<p>From now on, the functions of <code class="language-plaintext highlighter-rouge">plotnine</code> are available using <code class="language-plaintext highlighter-rouge">p9.</code>. For the
+exercise, we will use the <code class="language-plaintext highlighter-rouge">surveys.csv</code> data set, with the <code class="language-plaintext highlighter-rouge">NA</code> values removed</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">surveys_complete</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'data/surveys.csv'</span><span class="p">)</span>
+<span class="n">surveys_complete</span> <span class="o">=</span> <span class="n">surveys_complete</span><span class="p">.</span><span class="n">dropna</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="plotting-with-plotnine">Plotting with plotnine</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">plotnine</code> package (cfr. other packages conform The Grammar of Graphics) supports the creation of complex plots from data in a
+dataframe. It uses default settings, which help creating publication quality
+plots with a minimal amount of settings and tweaking.</p>
+
+<p><code class="language-plaintext highlighter-rouge">plotnine</code> graphics are built step by step by adding new elements adding
+different elements on top of each other using the <code class="language-plaintext highlighter-rouge">+</code> operator. Putting the
+individual steps together in brackets <code class="language-plaintext highlighter-rouge">()</code> provides Python-compatible syntax.</p>
+
+<p>To build a <code class="language-plaintext highlighter-rouge">plotnine</code> graphic we need to:</p>
+
+<ul>
+  <li>Bind the plot to a specific data frame using the <code class="language-plaintext highlighter-rouge">data</code> argument:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">))</span>
+</code></pre></div></div>
+<p>As we have not defined anything else, just an empty figure is available and
+presented.</p>
+
+<p>As we have not defined anything else, just an empty figure is available and
+presented.</p>
+
+<ul>
+  <li>Define aesthetics (<code class="language-plaintext highlighter-rouge">aes</code>), by <strong>selecting variables</strong> used in the plot and
+<code class="language-plaintext highlighter-rouge">mapping</code> them to a presentation such as plotting size, shape, color, etc. You
+can interpret this as: <strong>which</strong> of the variables will influence the plotted
+objects/geometries:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>The most important aes mappings are: <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">alpha</code>, <code class="language-plaintext highlighter-rouge">color</code>, <code class="language-plaintext highlighter-rouge">colour</code>,
+<code class="language-plaintext highlighter-rouge">fill</code>, <code class="language-plaintext highlighter-rouge">linetype</code>, <code class="language-plaintext highlighter-rouge">shape</code>, <code class="language-plaintext highlighter-rouge">size</code> and <code class="language-plaintext highlighter-rouge">stroke</code>.</p>
+
+<ul>
+  <li>Still no specific data is plotted, as we have to define what kind of geometry
+will be used for the plot. The most straightforward is probably using points.
+Points is one of the <code class="language-plaintext highlighter-rouge">geoms</code> options, the graphical representation of the data
+in the plot. Others are lines, bars,… To add a geom to the plot use <code class="language-plaintext highlighter-rouge">+</code>
+operator:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">+</code> in the <code class="language-plaintext highlighter-rouge">plotnine</code> package is particularly useful because it allows you
+to modify existing <code class="language-plaintext highlighter-rouge">plotnine</code> objects. This means you can easily set up plot
+<em>templates</em> and conveniently explore different types of plots, so the above
+plot can also be generated with code like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create
+</span><span class="n">surveys_plot</span> <span class="o">=</span> <span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+                         <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">))</span>
+
+<span class="c1"># Draw the plot
+</span><span class="n">surveys_plot</span> <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_first_plot.png" alt="png"></p>
+
+<blockquote class="challenge">
+  <h2 id="challenge---bar-chart">Challenge - bar chart</h2>
+  <p>Working on the <code class="language-plaintext highlighter-rouge">surveys_complete</code> data set, use the <code class="language-plaintext highlighter-rouge">plot-id</code> column to
+create a <code class="language-plaintext highlighter-rouge">bar</code>-plot that counts the number of records for each plot. (Check
+the documentation of the bar geometry to handle the counts)</p>
+
+  <blockquote class="solution">
+    <h2 id="answers">Answers<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+
+    <div class="language-python highlighter-rouge" style="display: none;"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'plot_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_bar</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p style="display: none;"><img src="./07-visualization_files/06_challenge_bar.png" alt="png"></p>
+  </blockquote>
+</blockquote>
+
+<p>Notes:</p>
+
+<ul>
+  <li>Anything you put in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function can be seen by any geom layers
+that you add (i.e., these are universal plot settings). This includes the <code class="language-plaintext highlighter-rouge">x</code>
+and <code class="language-plaintext highlighter-rouge">y</code> axis you set up in <code class="language-plaintext highlighter-rouge">aes()</code>.</li>
+  <li>You can also specify aesthetics for a given <code class="language-plaintext highlighter-rouge">geom</code> independently of the
+aesthetics defined globally in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function.</li>
+</ul>
+
+<h2 id="building-your-plots-iteratively">Building your plots iteratively</h2>
+
+<p>Building plots with <code class="language-plaintext highlighter-rouge">plotnine</code> is typically an iterative process. We start by
+defining the dataset we’ll use, lay the axes, and choose a geom. Hence, the
+<code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">aes</code> and <code class="language-plaintext highlighter-rouge">geom-*</code> are the elementary elements of any graph:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Then, we start modifying this plot to extract more information from it. For
+instance, we can add transparency (alpha) to avoid overplotting:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_alpha_plot.png" alt="png"></p>
+
+<p>We can also add colors for all the points</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_blue_plot.png" alt="png"></p>
+
+<p>Or to color each species in the plot differently, map the <code class="language-plaintext highlighter-rouge">species_id</code> column
+to the color aesthetic:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_color_plot.png" alt="png"></p>
+
+<p>Apart from the adaptations of the arguments and settings of the <code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">aes</code>
+and <code class="language-plaintext highlighter-rouge">geom-*</code> elements, additional elements can be added as well, using the <code class="language-plaintext highlighter-rouge">+</code>
+operator:</p>
+
+<ul>
+  <li>Changing the labels:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">xlab</span><span class="p">(</span><span class="s">"Weight (g)"</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_color_label_plot.png" alt="png"></p>
+
+<ul>
+  <li>Defining scale for colors, axes,… For example, a log-version of the x-axis
+could support the interpretation of the lower numbers:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">xlab</span><span class="p">(</span><span class="s">"Weight (g)"</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">scale_x_log10</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_log_plot.png" alt="png"></p>
+
+<ul>
+  <li>Changing the theme (<code class="language-plaintext highlighter-rouge">theme_*</code>) or some specific theming (<code class="language-plaintext highlighter-rouge">theme</code>) elements.
+Usually plots with white background look more readable when printed.  We can
+set the background to white using the function <code class="language-plaintext highlighter-rouge">theme_bw()</code>.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">xlab</span><span class="p">(</span><span class="s">"Weight (g)"</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">scale_x_log10</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">theme_bw</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">))</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_white_plot.png" alt="png"></p>
+
+<blockquote class="challenge">
+  <h2 id="challenge---bar-plot-adaptations">Challenge - Bar plot adaptations</h2>
+  <p>Adapt the bar plot of the previous exercise by mapping the <code class="language-plaintext highlighter-rouge">sex</code> variable to
+the color fill of the bar chart. Change the <code class="language-plaintext highlighter-rouge">scale</code> of the color fill by
+providing the colors <code class="language-plaintext highlighter-rouge">blue</code> and <code class="language-plaintext highlighter-rouge">orange</code> manually
+(see <a href="https://plotnine.readthedocs.io/en/stable/api.html#color-and-fill-scales">API reference</a> to find the appropriate function).</p>
+
+  <blockquote class="solution">
+    <h2 id="answers-1">Answers<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+
+    <div class="language-python highlighter-rouge" style="display: none;"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'plot_id'</span><span class="p">,</span>
+                          <span class="n">fill</span><span class="o">=</span><span class="s">'sex'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_bar</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">scale_fill_manual</span><span class="p">([</span><span class="s">"blue"</span><span class="p">,</span> <span class="s">"orange"</span><span class="p">])</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+    <p style="display: none;"><img src="./07-visualization_files/06_challenge_color_bar.png" alt="png"></p>
+  </blockquote>
+</blockquote>
+
+<h2 id="plotting-distributions">Plotting distributions</h2>
+
+<p>Visualizing distributions is a common task during data exploration and
+analysis. To visualize the distribution of <code class="language-plaintext highlighter-rouge">weight</code> within each <code class="language-plaintext highlighter-rouge">species_id</code>
+group, a boxplot can be used:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'weight'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_boxplot</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_boxplot.png" alt="png"></p>
+
+<p>By adding points of the individual observations to the boxplot, we can have a
+better idea of the number of measurements and of their distribution:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'weight'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_jitter</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_boxplot</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_point_boxplot.png" alt="png"></p>
+
+<blockquote class="challenge">
+  <h2 id="challenge---distributions">Challenge - distributions</h2>
+
+  <p>Boxplots are useful summaries, but hide the <em>shape</em> of the distribution.
+For example, if there is a bimodal distribution, this would not be observed
+with a boxplot. An alternative to the boxplot is the violin plot (sometimes
+known as a beanplot), where the shape (of the density of points) is drawn.</p>
+
+  <p>In many types of data, it is important to consider the <em>scale</em> of the
+observations.  For example, it may be worth changing the scale of the axis
+to better distribute the observations in the space of the plot.</p>
+
+  <ul>
+    <li>Replace the box plot with a violin plot, see <code class="language-plaintext highlighter-rouge">geom_violin()</code></li>
+    <li>Represent weight on the log10 scale, see <code class="language-plaintext highlighter-rouge">scale_y_log10()</code></li>
+    <li>Add color to the datapoints on your boxplot according to the plot from which
+the sample was taken (<code class="language-plaintext highlighter-rouge">plot_id</code>)</li>
+  </ul>
+
+  <p>Hint: Check the class for <code class="language-plaintext highlighter-rouge">plot_id</code>. By using <code class="language-plaintext highlighter-rouge">factor()</code> within the <code class="language-plaintext highlighter-rouge">aes</code>
+mapping of a variable, <code class="language-plaintext highlighter-rouge">plotnine</code> will handle the values as category values.</p>
+
+  <blockquote class="solution">
+    <h2 id="answers-2">Answers<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+
+    <div class="language-python highlighter-rouge" style="display: none;"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="s">'factor(plot_id)'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_jitter</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_violin</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"0.7"</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">scale_y_log10</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+    <p style="display: none;"><img src="./07-visualization_files/06_challenge_boxplot.png" alt="png"></p>
+  </blockquote>
+</blockquote>
+
+<h2 id="plotting-time-series-data">Plotting time series data</h2>
+
+<p>Let’s calculate number of counts per year for each species. To do that we need
+to group data first and count the species (<code class="language-plaintext highlighter-rouge">species_id</code>) within each group.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">yearly_counts</span> <span class="o">=</span> <span class="n">surveys_complete</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'year'</span><span class="p">,</span> <span class="s">'species_id'</span><span class="p">])[</span><span class="s">'species_id'</span><span class="p">].</span><span class="n">count</span><span class="p">()</span>
+<span class="n">yearly_counts</span>
+</code></pre></div></div>
+
+<p>When checking the result of the previous calculation, we actually have both the
+<code class="language-plaintext highlighter-rouge">year</code> and the <code class="language-plaintext highlighter-rouge">species_id</code> as a row index. We can reset this index to use both
+as column variable:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">yearly_counts</span> <span class="o">=</span> <span class="n">yearly_counts</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'counts'</span><span class="p">)</span>
+<span class="n">yearly_counts</span>
+</code></pre></div></div>
+
+<p>Timelapse data can be visualised as a line plot (<code class="language-plaintext highlighter-rouge">geom_line</code>) with years on <code class="language-plaintext highlighter-rouge">x</code>
+axis and counts on the <code class="language-plaintext highlighter-rouge">y</code> axis.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">yearly_counts</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'year'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'counts'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_line</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Unfortunately this does not work, because we plot data for all the species
+together. We need to tell <code class="language-plaintext highlighter-rouge">plotnine</code> to draw a line for each species by
+modifying the aesthetic function and map the species_id to the color:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">yearly_counts</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'year'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'counts'</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_line</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_time_plot.png" alt="png"></p>
+
+<h2 id="faceting">Faceting</h2>
+
+<p>As any other library supporting the Grammar of Graphics, <code class="language-plaintext highlighter-rouge">plotnine</code> has a
+special technique called <em>faceting</em> that allows to split one plot into multiple
+plots based on a factor variable included in the dataset.</p>
+
+<p>Consider our scatter plot of the <code class="language-plaintext highlighter-rouge">weight</code> versus the <code class="language-plaintext highlighter-rouge">hindfoot_length</code> from the
+previous sections:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can now keep the same code and at the <code class="language-plaintext highlighter-rouge">facet_wrap</code> on a chosen variable to
+split out the graph and make a separate graph for each of the groups in that
+variable. As an example, use <code class="language-plaintext highlighter-rouge">sex</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">facet_wrap</span><span class="p">(</span><span class="s">"sex"</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<p><img src="./07-visualization_files/06_facet_plot.png" alt="png"></p>
+
+<p>We can apply the same concept on any of the available categorical variables:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">facet_wrap</span><span class="p">(</span><span class="s">"plot_id"</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_facet_all_plot.png" alt="png"></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">facet_wrap</code> geometry extracts plots into an arbitrary number of dimensions
+to allow them to cleanly fit on one page. On the other hand, the <code class="language-plaintext highlighter-rouge">facet_grid</code>
+geometry allows you to explicitly specify how you want your plots to be
+arranged via formula notation (<code class="language-plaintext highlighter-rouge">rows ~ columns</code>; a <code class="language-plaintext highlighter-rouge">.</code> can be used as a
+placeholder that indicates only one row or column).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># only select the years of interest
+</span><span class="n">survey_2000</span> <span class="o">=</span> <span class="n">surveys_complete</span><span class="p">[</span><span class="n">surveys_complete</span><span class="p">[</span><span class="s">"year"</span><span class="p">].</span><span class="n">isin</span><span class="p">([</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2001</span><span class="p">])]</span>
+
+<span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">survey_2000</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="s">'species_id'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">facet_grid</span><span class="p">(</span><span class="s">"year ~ sex"</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<p><img src="./07-visualization_files/06_select_plot.png" alt="png"></p>
+
+<blockquote class="challenge">
+  <h2 id="challenge---facetting">Challenge - facetting</h2>
+  <p>Create a separate plot for each of the species that depicts how the average
+weight of the species changes through the years.</p>
+
+  <blockquote class="solution">
+    <h2 id="answers-3">Answers<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+    <p style="display: none;">yearly_weight = surveys_complete.groupby([‘year’, ‘species_id’])[‘weight’].mean().reset_index()</p>
+
+    <div class="language-python highlighter-rouge" style="display: none;"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">yearly_weight</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'year'</span><span class="p">,</span>
+                          <span class="n">y</span><span class="o">=</span><span class="s">'weight'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_line</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">facet_wrap</span><span class="p">(</span><span class="s">"species_id"</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="challenge---facetting-1">Challenge - facetting</h2>
+  <p>Based on the previous exercise, visually compare how the weights of male and
+females has changed through time by creating a separate plot for each sex and
+an individual color assigned to each <code class="language-plaintext highlighter-rouge">species_id</code>.</p>
+
+  <blockquote class="solution">
+    <h2 id="answers-4">Answers<span class="fold-unfold glyphicon glyphicon-collapse-down"></span></h2>
+    <p style="display: none;">yearly_weight = surveys_complete.groupby([‘year’, ‘species_id’, ‘sex’])[‘weight’].mean().reset_index()</p>
+
+    <p class="language-python" style="display: none;">(p9.ggplot(data=yearly_weight,
+           mapping=p9.aes(x=’year’,
+                          y=’weight’,
+                          color=’species_id’))
+    + p9.geom_line()
+    + p9.facet_wrap(“sex”)
+)</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="further-customization">Further customization</h2>
+
+<p>As the syntax of <code class="language-plaintext highlighter-rouge">plotnine</code> follows the original R package <code class="language-plaintext highlighter-rouge">ggplot2</code>, the
+documentation of <code class="language-plaintext highlighter-rouge">ggplot2</code> can provide information and inspiration to customize
+graphs. Take a look at the <code class="language-plaintext highlighter-rouge">ggplot2</code> <a href="https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf">cheat sheet</a>, and think of ways to
+improve the plot. You can write down some of your ideas as comments in the Etherpad.</p>
+
+<p>The theming options provide a rich set of visual adaptations. Consider the
+following example of a bar plot with the counts per year.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'factor(year)'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_bar</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_overlap_bars.png" alt="png"></p>
+
+<p>Notice that we use the <code class="language-plaintext highlighter-rouge">year</code> here as a categorical variable by using the
+<code class="language-plaintext highlighter-rouge">factor</code> functionality. However, by doing so, we have the individual year
+labels overlapping with each other. The <code class="language-plaintext highlighter-rouge">theme</code> functionality provides a way to
+rotate the text of the x-axis labels:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'factor(year)'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_bar</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">theme_bw</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">theme</span><span class="p">(</span><span class="n">axis_text_x</span> <span class="o">=</span> <span class="n">p9</span><span class="p">.</span><span class="n">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">))</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_good_bars.png" alt="png"></p>
+
+<p>When you like a specific set of theme-customizations you created, you can save
+them as an object to easily apply them to other plots you may create:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_custom_theme</span> <span class="o">=</span> <span class="n">p9</span><span class="p">.</span><span class="n">theme</span><span class="p">(</span><span class="n">axis_text_x</span> <span class="o">=</span> <span class="n">p9</span><span class="p">.</span><span class="n">element_text</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">"grey"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                                         <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">hjust</span><span class="o">=</span><span class="p">.</span><span class="mi">5</span><span class="p">),</span>
+                           <span class="n">axis_text_y</span> <span class="o">=</span> <span class="n">p9</span><span class="p">.</span><span class="n">element_text</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">"grey"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'factor(year)'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_bar</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">my_custom_theme</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="./07-visualization_files/06_theme_plot.png" alt="png"></p>
+
+<blockquote class="challenge">
+  <h2 id="challenge---customization">Challenge - customization</h2>
+  <p>Please take another five minutes to either improve one of the plots
+generated in this exercise or create a beautiful graph of your own.</p>
+
+  <p>Here are some ideas:</p>
+
+  <ul>
+    <li>See if you can change thickness of lines for the line plot .</li>
+    <li>Can you find a way to change the name of the legend? What about its labels?</li>
+    <li>Use a different color palette (see <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)">http://www.cookbook-r.com/Graphs/Colors_(ggplot2)</a>)</li>
+  </ul>
+</blockquote>
+
+<p>After creating your plot, you can save it to a file in your favourite format.
+You can easily change the dimension (and its resolution) of your plot by
+adjusting the appropriate arguments (<code class="language-plaintext highlighter-rouge">width</code>, <code class="language-plaintext highlighter-rouge">height</code> and <code class="language-plaintext highlighter-rouge">dpi</code>):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_plot</span> <span class="o">=</span> <span class="p">(</span><span class="n">p9</span><span class="p">.</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">surveys_complete</span><span class="p">,</span>
+           <span class="n">mapping</span><span class="o">=</span><span class="n">p9</span><span class="p">.</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">'weight'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">'hindfoot_length'</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">p9</span><span class="p">.</span><span class="n">geom_point</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">my_plot</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"scatterplot.png"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>The <code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">aes</code> variables and a <code class="language-plaintext highlighter-rouge">geometry</code> are the main elements of a plotnine graph</p>
+</li>
+    
+    <li><p>With the <code class="language-plaintext highlighter-rouge">+</code> operator, additional <code class="language-plaintext highlighter-rouge">scale_*</code>, <code class="language-plaintext highlighter-rouge">theme_*</code>, <code class="language-plaintext highlighter-rouge">xlab/ylab</code> and <code class="language-plaintext highlighter-rouge">facet_*</code> elements are added</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="./06-loops-and-functions.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="./08-all-together.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <div class="row">
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script async="" src="../js/analytics.js.download"></script><script src="../js/jquery.min.js.download"></script>
+<script src="../js/bootstrap.min.js.download"></script>
+<script src="../js/lesson.js.download"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+  
+
+</body></html>
